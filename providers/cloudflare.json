@@ -1,0 +1,16 @@
+{
+  "id": "cloudflare",
+  "name": "Cloudflare (1.1.1.1)",
+  "website": "https://1.1.1.1",
+  "country": "GLOBAL",
+  "primaryCategory": "General",
+  "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+  "endpoints": {
+    "primaryDns": "1.1.1.1",
+    "secondaryDns": "1.0.0.1",
+    "ipv6Primary": "2606:4700:4700::1111",
+    "ipv6Secondary": "2606:4700:4700::1001",
+    "dohUrl": "https://cloudflare-dns.com/dns-query",
+    "dotHostname": "cloudflare-dns.com"
+  }
+}
