@@ -8,13 +8,13 @@
       "id": "default",
       "name": "Public Recursor",
       "primaryCategory": "Regional",
-      "tags": ["doh", "ipv4", "ipv6"],
+      "tags": ["ipv4", "ipv6"],
       "endpoints": {
         "primaryDns": "168.95.1.1",
         "secondaryDns": "168.95.192.1",
         "ipv6Primary": "2001:b000:168::1",
         "ipv6Secondary": "2001:b000:168::2",
-        "dohUrl": "https://dns.hinet.net/dns-query",
+        "dohUrl": null,
         "dotHostname": null
       },
       "notes": "Dominant Taiwanese ISP recursive resolver infrastructure (dns.hinet.net) accessible across East Asia."

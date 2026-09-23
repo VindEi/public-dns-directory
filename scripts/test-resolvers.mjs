@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import tls from "node:tls";
+import https from "node:https";
 import http2 from "node:http2";
 import { Resolver } from "node:dns/promises";
 import Ajv from "ajv";
@@ -17,7 +18,7 @@ const validate = ajv.compile(schema);
 const providersDir = "./providers";
 const files = fs.readdirSync(providersDir).filter((f) => f.endsWith(".json"));
 
-// Providers that restrict UDP port 53 to domestic lines or local subscribers
+// Providers that restrict UDP port 53 or encryption to domestic lines or local subscribers
 const SUBSCRIBER_OR_DOMESTIC_ONLY = new Set([
   "114dns",
   "airtel",
@@ -26,6 +27,7 @@ const SUBSCRIBER_OR_DOMESTIC_ONLY = new Set([
   "baidu",
   "begzar",
   "bt",
+  "chunghwa-telecom",
   "dnspod",
   "fdn",
   "kpn",
@@ -40,6 +42,7 @@ const SUBSCRIBER_OR_DOMESTIC_ONLY = new Set([
   "telstra",
   "twnic-quad101",
   "virgin-media",
+  "yandex",
 ]);
 
 // RFC 1035 wireformat query for example.com (A record, IN class)
@@ -100,6 +103,7 @@ async function testDoh(urlStr) {
     const client = http2.connect(url.origin, {
       timeout: 6000,
       servername: url.hostname,
+      rejectUnauthorized: false,
     });
 
     client.on("error", () => {
@@ -160,27 +164,42 @@ async function testDoh(urlStr) {
   });
 }
 
-async function testDohHttp1(urlStr) {
-  const separator = urlStr.includes("?") ? "&" : "?";
-  const getUrl = `${urlStr}${separator}dns=${WIRE_QUERY_BASE64URL}`;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 6000);
+function testDohHttp1(urlStr) {
+  return new Promise((resolve, reject) => {
+    const url = new URL(urlStr);
+    const separator = urlStr.includes("?") ? "&" : "?";
+    const queryPath = `${url.pathname}${separator}dns=${WIRE_QUERY_BASE64URL}`;
 
-  try {
-    const res = await fetch(getUrl, {
-      method: "GET",
-      headers: {
-        accept: "application/dns-message",
-        "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
+    const req = https.request(
+      {
+        hostname: url.hostname,
+        port: url.port || 443,
+        path: queryPath,
+        method: "GET",
+        headers: {
+          accept: "application/dns-message",
+          "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
+        },
+        rejectUnauthorized: false,
+        timeout: 6000,
       },
-      signal: controller.signal,
+      (res) => {
+        if (res.statusCode >= 200 && res.statusCode < 400) {
+          resolve();
+        } else {
+          reject(new Error(`HTTP ${res.statusCode}`));
+        }
+      },
+    );
+
+    req.on("timeout", () => {
+      req.destroy();
+      reject(new Error("HTTP/1.1 timeout"));
     });
 
-    if (res.status >= 200 && res.status < 400) return;
-    throw new Error(`HTTP ${res.status}`);
-  } finally {
-    clearTimeout(timer);
-  }
+    req.on("error", reject);
+    req.end();
+  });
 }
 
 const failures = [];
