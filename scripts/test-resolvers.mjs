@@ -66,9 +66,15 @@ function isPrivateIp(ip) {
 }
 
 async function testUdpDns(ip) {
-  const resolver = new Resolver({ timeout: 4000, tries: 1 });
+  const resolver = new Resolver({ timeout: 4000, tries: 2 });
   resolver.setServers([ip]);
-  await resolver.resolve4("example.com");
+  try {
+    await resolver.resolve4("example.com");
+  } catch (err) {
+    // Retry once on rate-limited or dropped UDP packets
+    await new Promise((r) => setTimeout(r, 600));
+    await resolver.resolve4("example.com");
+  }
 }
 
 async function testDot(dotHostname) {
@@ -95,7 +101,7 @@ async function testDot(dotHostname) {
   });
 }
 
-async function testDoh(urlStr) {
+function testDohInternal(urlStr) {
   return new Promise((resolve, reject) => {
     let resolved = false;
     const url = new URL(urlStr);
@@ -200,6 +206,16 @@ function testDohHttp1(urlStr) {
     req.on("error", reject);
     req.end();
   });
+}
+
+async function testDoh(urlStr) {
+  try {
+    await testDohInternal(urlStr);
+  } catch (err) {
+    // Retry once after 800ms cooldown for rate-limited sockets
+    await new Promise((r) => setTimeout(r, 800));
+    await testDohInternal(urlStr);
+  }
 }
 
 const failures = [];
