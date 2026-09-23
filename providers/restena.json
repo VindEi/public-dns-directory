@@ -8,16 +8,16 @@
       "id": "default",
       "name": "Public Resolver",
       "primaryCategory": "General",
-      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "tags": ["doh", "dot", "no-log"],
       "endpoints": {
-        "primaryDns": "158.64.1.29",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2001:a18:1::29",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://dnspub.restena.lu/dns-query",
         "dotHostname": "dnspub.restena.lu"
       },
-      "notes": "Luxembourg national research and education network public recursor supporting DoH and DoT with DNSSEC validation."
+      "notes": "Luxembourg national research and education network public recursor supporting DoH and DoT with DNSSEC validation. Plain port 53 is disabled."
     }
   ]
 }

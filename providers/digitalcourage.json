@@ -8,16 +8,16 @@
       "id": "default",
       "name": "Censorshipless Resolver",
       "primaryCategory": "General",
-      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "tags": ["doh", "dot", "no-log"],
       "endpoints": {
-        "primaryDns": "5.9.164.112",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a01:4f8:161:7442::2",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
-        "dohUrl": "https://dns.digitalcourage.de/dns-query",
+        "dohUrl": "https://dns3.digitalcourage.de/dns-query",
         "dotHostname": "dns3.digitalcourage.de"
       },
-      "notes": "Operated by German privacy NGO Digitalcourage. No logging, no censorship, DNSSEC validated."
+      "notes": "Operated by German privacy NGO Digitalcourage. No logging, no censorship, DNSSEC validated. Plain port 53 is disabled."
     }
   ]
 }

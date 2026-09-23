@@ -15,7 +15,7 @@
         "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://doh.applied-privacy.net/query",
-        "dotHostname": "dot.applied-privacy.net"
+        "dotHostname": "dot1.applied-privacy.net"
       },
       "notes": "Austrian non-profit promoting digital privacy and uncensored encrypted DNS. Plain port 53 is disabled."
     }

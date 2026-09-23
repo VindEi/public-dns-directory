@@ -8,31 +8,31 @@
       "id": "standard",
       "name": "Standard (Unfiltered)",
       "primaryCategory": "General",
-      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "tags": ["doh", "dot", "no-log"],
       "endpoints": {
-        "primaryDns": "116.202.176.26",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a01:4f8:1c0c:8274::1",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://doh.libredns.gr/dns-query",
         "dotHostname": "dot.libredns.gr"
       },
-      "notes": "Operated by LibreOps in Greece. Zero-logging, uncensored recursive DoH/DoT resolver."
+      "notes": "Operated by LibreOps in Greece. Zero-logging, uncensored recursive DoH/DoT resolver. Plain port 53 is disabled."
     },
     {
       "id": "noads",
       "name": "No Ads",
       "primaryCategory": "Ad-Blocking",
-      "tags": ["doh", "dot", "ipv4", "ipv6", "adblock", "no-log"],
+      "tags": ["doh", "dot", "adblock", "no-log"],
       "endpoints": {
-        "primaryDns": "116.202.176.26",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a01:4f8:1c0c:8274::1",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://doh.libredns.gr/noads",
         "dotHostname": "noads.libredns.gr"
       },
-      "notes": "LibreDNS ad and tracker blocking endpoint."
+      "notes": "LibreDNS ad and tracker blocking endpoint. Plain port 53 is disabled."
     }
   ]
 }

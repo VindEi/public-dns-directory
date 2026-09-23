@@ -35,21 +35,6 @@
       "notes": "Blocks malware and phishing hosts without applying ad-blocking rules."
     },
     {
-      "id": "family",
-      "name": "Family (Internet Sehat)",
-      "primaryCategory": "Family",
-      "tags": ["doh", "dot", "adblock", "bypass", "malware-blocking"],
-      "endpoints": {
-        "primaryDns": null,
-        "secondaryDns": null,
-        "ipv6Primary": null,
-        "ipv6Secondary": null,
-        "dohUrl": "https://internetsehat.bebasid.com/dns-query",
-        "dotHostname": "internetsehat.bebasid.com"
-      },
-      "notes": "Blocks adult websites, pornographic content, and gambling domains alongside malware."
-    },
-    {
       "id": "unfiltered",
       "name": "Unfiltered",
       "primaryCategory": "General",

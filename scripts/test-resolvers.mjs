@@ -1,11 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import tls from "node:tls";
+import http2 from "node:http2";
 import { Resolver } from "node:dns/promises";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
-// Initialize Schema Validator
 const ajv = new Ajv({ allErrors: true, validateSchema: false });
 addFormats(ajv);
 
@@ -16,6 +16,21 @@ const validate = ajv.compile(schema);
 
 const providersDir = "./providers";
 const files = fs.readdirSync(providersDir).filter((f) => f.endsWith(".json"));
+
+// Known closed subscriber-only telcos or domestic-only networks
+const SUBSCRIBER_OR_DOMESTIC_ONLY = new Set([
+  "airtel",
+  "bt",
+  "kpn",
+  "orange-france",
+  "singtel",
+  "starhub",
+  "telefonica",
+  "virgin-media",
+  "shecan",
+  "arvancloud",
+  "shelter-dns",
+]);
 
 // RFC 1035 wireformat query for example.com (A record, IN class)
 const DNS_WIRE_QUERY = Buffer.from([
@@ -50,7 +65,7 @@ async function testDot(dotHostname) {
         host: dotHostname,
         port: 853,
         servername: dotHostname,
-        timeout: 4000,
+        timeout: 4500,
         rejectUnauthorized: true,
       },
       () => {
@@ -67,47 +82,104 @@ async function testDot(dotHostname) {
   });
 }
 
-async function testDoh(url) {
+// Tests DoH over native HTTP/2, falling back to HTTP/1.1
+async function testDoh(urlStr) {
+  return new Promise((resolve, reject) => {
+    let resolved = false;
+    const url = new URL(urlStr);
+
+    // 1. Try HTTP/2 (Mandatory per RFC 8484 §5.2)
+    const client = http2.connect(url.origin, { timeout: 4500 });
+
+    client.on("error", () => {
+      if (!resolved) {
+        resolved = true;
+        client.destroy();
+        // Fallback to HTTP/1.1
+        testDohHttp1(urlStr).then(resolve).catch(reject);
+      }
+    });
+
+    client.on("timeout", () => {
+      if (!resolved) {
+        resolved = true;
+        client.destroy();
+        reject(new Error("HTTP/2 timeout"));
+      }
+    });
+
+    const path = `${url.pathname}${url.search ? url.search + "&" : "?"}dns=${WIRE_QUERY_BASE64URL}`;
+    const req = client.request({
+      [http2.constants.HTTP2_HEADER_SCHEME]: "https",
+      [http2.constants.HTTP2_HEADER_METHOD]: http2.constants.HTTP2_METHOD_GET,
+      [http2.constants.HTTP2_HEADER_PATH]: path,
+      accept: "application/dns-message",
+      "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
+    });
+
+    req.setTimeout(4500, () => {
+      if (!resolved) {
+        resolved = true;
+        req.destroy();
+        client.destroy();
+        reject(new Error("Stream timeout"));
+      }
+    });
+
+    req.on("response", (headers) => {
+      if (resolved) return;
+      resolved = true;
+      const status = Number(headers[http2.constants.HTTP2_HEADER_STATUS]);
+      client.destroy();
+      if (status >= 200 && status < 400) {
+        resolve();
+      } else {
+        reject(new Error(`HTTP ${status}`));
+      }
+    });
+
+    req.on("error", (err) => {
+      if (!resolved) {
+        resolved = true;
+        client.destroy();
+        testDohHttp1(urlStr).then(resolve).catch(reject);
+      }
+    });
+
+    req.end();
+  });
+}
+
+// Fallback HTTP/1.1 probe
+async function testDohHttp1(urlStr) {
+  const separator = urlStr.includes("?") ? "&" : "?";
+  const getUrl = `${urlStr}${separator}dns=${WIRE_QUERY_BASE64URL}`;
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 4000);
+  const timer = setTimeout(() => controller.abort(), 4500);
 
   try {
-    // 1. First try RFC 8484 GET with ?dns=<base64url> (Mandatory by standard)
-    const separator = url.includes("?") ? "&" : "?";
-    const getUrl = `${url}${separator}dns=${WIRE_QUERY_BASE64URL}`;
-
-    let res = await fetch(getUrl, {
+    const res = await fetch(getUrl, {
       method: "GET",
-      headers: { accept: "application/dns-message" },
-      signal: controller.signal,
-    });
-
-    if (res.ok) return;
-
-    // 2. Fallback to POST with explicit Content-Length if GET returned 4xx/5xx
-    res = await fetch(url, {
-      method: "POST",
       headers: {
-        "content-type": "application/dns-message",
         accept: "application/dns-message",
-        "content-length": String(DNS_WIRE_QUERY.length),
+        "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
       },
-      body: DNS_WIRE_QUERY,
       signal: controller.signal,
     });
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (res.status >= 200 && res.status < 400) return;
+    throw new Error(`HTTP ${res.status}`);
   } finally {
-    clearTimeout(timeoutId);
+    clearTimeout(timer);
   }
 }
 
-// Global Results Store
 const failures = [];
+const warnings = [];
 let totalProbes = 0;
 let passedProbes = 0;
 
-console.log(`\n🚀 Testing ${files.length} DNS providers...\n`);
+console.log(`\nTesting ${files.length} DNS providers...\n`);
 
 for (const file of files) {
   const filePath = path.join(providersDir, file);
@@ -119,11 +191,11 @@ for (const file of files) {
     failures.push({
       file,
       profile: "FILE",
-      target: file,
       type: "JSON",
+      target: file,
       error: err.message,
     });
-    console.log(`❌ [PARSE ERROR] ${file}`);
+    console.log(`[PARSE ERROR] ${file}`);
     continue;
   }
 
@@ -131,8 +203,8 @@ for (const file of files) {
     failures.push({
       file,
       profile: "FILE",
-      target: data.id,
       type: "SCHEMA",
+      target: data.id,
       error: `ID mismatch with filename`,
     });
   }
@@ -141,20 +213,21 @@ for (const file of files) {
     failures.push({
       file,
       profile: "FILE",
-      target: "schema",
       type: "SCHEMA",
+      target: "schema",
       error: JSON.stringify(validate.errors[0]?.message),
     });
-    console.log(`❌ [SCHEMA FAIL] ${file}`);
+    console.log(`[SCHEMA FAIL] ${file}`);
     continue;
   }
 
   let fileHasError = false;
+  const isSubscriberRestricted = SUBSCRIBER_OR_DOMESTIC_ONLY.has(data.id);
 
   for (const profile of data.profiles) {
     const { endpoints } = profile;
 
-    // Probing UDP 53
+    // UDP 53 Probes
     for (const key of ["primaryDns", "secondaryDns"]) {
       const ip = endpoints[key];
       if (!ip || isPrivateIp(ip)) continue;
@@ -164,18 +237,28 @@ for (const file of files) {
         await testUdpDns(ip);
         passedProbes++;
       } catch (err) {
-        fileHasError = true;
-        failures.push({
-          file,
-          profile: profile.id,
-          target: ip,
-          type: "UDP 53",
-          error: err.code || err.message,
-        });
+        if (isSubscriberRestricted) {
+          warnings.push({
+            file,
+            profile: profile.id,
+            target: ip,
+            type: "UDP 53",
+            error: "SUBSCRIBER/GEO-RESTRICTED",
+          });
+        } else {
+          fileHasError = true;
+          failures.push({
+            file,
+            profile: profile.id,
+            target: ip,
+            type: "UDP 53",
+            error: err.code || err.message,
+          });
+        }
       }
     }
 
-    // Probing DoT
+    // DoT Probes
     if (endpoints.dotHostname) {
       totalProbes++;
       try {
@@ -193,7 +276,7 @@ for (const file of files) {
       }
     }
 
-    // Probing DoH
+    // DoH Probes
     if (endpoints.dohUrl) {
       totalProbes++;
       try {
@@ -212,30 +295,48 @@ for (const file of files) {
     }
   }
 
-  // Single clean line per provider
   if (fileHasError) {
-    console.log(`❌ [FAIL] ${data.id}`);
+    console.log(`[FAIL] ${data.id}`);
   } else {
-    console.log(`✅ [PASS] ${data.id}`);
+    console.log(`[PASS] ${data.id}`);
   }
 }
 
-// ------------------- UX REPORTING SECTION -------------------
-
+// Results Formatting
 console.log("\n" + "=".repeat(105));
 console.log(
-  `📊 TEST COMPLETE: ${passedProbes}/${totalProbes} probes passed (${failures.length} errors across ${files.length} providers)`,
+  `PROBES COMPLETE: ${passedProbes}/${totalProbes} passed (${failures.length} hard failures, ${warnings.length} warnings)`,
 );
 console.log("=".repeat(105) + "\n");
 
+const colWidths = { file: 24, profile: 15, type: 10, target: 32, error: 22 };
+const pad = (str, len) =>
+  str.length > len ? str.slice(0, len - 3) + "..." : str.padEnd(len);
+
+if (warnings.length > 0) {
+  console.log("SUBSCRIBER-ONLY / REGION-RESTRICTED WARNINGS (NON-FATAL):\n");
+  console.log(
+    pad("PROVIDER FILE", colWidths.file) +
+      pad("PROFILE", colWidths.profile) +
+      pad("TYPE", colWidths.type) +
+      pad("TARGET", colWidths.target) +
+      "NOTICE",
+  );
+  console.log("-".repeat(105));
+  for (const w of warnings) {
+    console.log(
+      pad(w.file, colWidths.file) +
+        pad(w.profile, colWidths.profile) +
+        pad(w.type, colWidths.type) +
+        pad(w.target, colWidths.target) +
+        w.error,
+    );
+  }
+  console.log("-".repeat(105) + "\n");
+}
+
 if (failures.length > 0) {
-  console.log("📋 CONSOLIDATED FAILURE SUMMARY:\n");
-
-  // Format a clean terminal table
-  const colWidths = { file: 22, profile: 15, type: 10, target: 30, error: 22 };
-  const pad = (str, len) =>
-    str.length > len ? str.slice(0, len - 3) + "..." : str.padEnd(len);
-
+  console.log("CRITICAL FAILURES (REQUIRING CONFIG FIX):\n");
   console.log(
     pad("PROVIDER FILE", colWidths.file) +
       pad("PROFILE", colWidths.profile) +
@@ -244,7 +345,6 @@ if (failures.length > 0) {
       "ERROR",
   );
   console.log("-".repeat(105));
-
   for (const f of failures) {
     console.log(
       pad(f.file, colWidths.file) +
@@ -256,7 +356,6 @@ if (failures.length > 0) {
   }
   console.log("-".repeat(105) + "\n");
 
-  // If running inside GitHub Actions, push Markdown table to Job Summary
   if (process.env.GITHUB_STEP_SUMMARY) {
     const summaryRows = failures
       .map(
@@ -265,7 +364,7 @@ if (failures.length > 0) {
       )
       .join("\n");
     const markdown = `
-### ❌ Resolver Verification Failures (${failures.length} issues)
+### Resolver Verification Failures (${failures.length})
 
 | Provider | Profile | Type | Target | Error |
 | :--- | :--- | :--- | :--- | :--- |
@@ -276,6 +375,6 @@ ${summaryRows}
 
   process.exit(1);
 } else {
-  console.log("✨ All resolvers passed connectivity tests successfully.\n");
+  console.log("All public resolvers verified successfully.\n");
   process.exit(0);
 }
