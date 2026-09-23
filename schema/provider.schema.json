@@ -1,8 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "DNSProvider",
   "type": "object",
-  "required": ["id", "name", "country", "primaryCategory", "tags", "endpoints"],
+  "required": ["id", "name", "website", "country", "profiles"],
   "additionalProperties": false,
   "properties": {
     "id": {
@@ -19,35 +19,70 @@
     },
     "country": {
       "type": "string",
-      "description": "ISO 3166-1 alpha-2 code, or GLOBAL",
-      "pattern": "^(GLOBAL|[A-Z]{2})$"
+      "description": "ISO 3166-1 alpha-2 code, or GLOBAL/EU",
+      "pattern": "^(GLOBAL|EU|[A-Z]{2})$"
     },
-    "primaryCategory": {
-      "type": "string",
-      "enum": ["General", "Ad-Blocking", "Security", "Family", "Regional", "Gaming"]
-    },
-    "tags": {
+    "profiles": {
       "type": "array",
-      "uniqueItems": true,
+      "minItems": 1,
       "items": {
-        "type": "string",
-        "enum": ["doh", "dot", "ipv4", "ipv6", "adblock", "no-log", "bypass", "malware-blocking"]
+        "type": "object",
+        "required": ["id", "name", "primaryCategory", "tags", "endpoints"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "primaryCategory": {
+            "type": "string",
+            "enum": [
+              "General",
+              "Ad-Blocking",
+              "Security",
+              "Family",
+              "Regional",
+              "Gaming"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "doh",
+                "dot",
+                "ipv4",
+                "ipv6",
+                "adblock",
+                "no-log",
+                "bypass",
+                "malware-blocking"
+              ]
+            }
+          },
+          "endpoints": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "primaryDns": { "type": ["string", "null"], "format": "ipv4" },
+              "secondaryDns": { "type": ["string", "null"], "format": "ipv4" },
+              "ipv6Primary": { "type": ["string", "null"], "format": "ipv6" },
+              "ipv6Secondary": { "type": ["string", "null"], "format": "ipv6" },
+              "dohUrl": { "type": ["string", "null"], "format": "uri" },
+              "dotHostname": { "type": ["string", "null"] }
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
       }
-    },
-    "endpoints": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "primaryDns": { "type": ["string", "null"], "format": "ipv4" },
-        "secondaryDns": { "type": ["string", "null"], "format": "ipv4" },
-        "ipv6Primary": { "type": ["string", "null"], "format": "ipv6" },
-        "ipv6Secondary": { "type": ["string", "null"], "format": "ipv6" },
-        "dohUrl": { "type": ["string", "null"], "format": "uri" },
-        "dotHostname": { "type": ["string", "null"] }
-      }
-    },
-    "notes": {
-      "type": "string"
     }
   }
 }

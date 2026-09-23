@@ -5,8 +5,8 @@ import { Resolver } from "node:dns/promises";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
-// Initialize Schema Validator
-const ajv = new Ajv({ allErrors: true });
+// Initialize Schema Validator with draft-07 and disable meta-schema lookup
+const ajv = new Ajv({ allErrors: true, validateSchema: false });
 addFormats(ajv);
 
 const schemaPath = "./schema/provider.schema.json";
@@ -24,7 +24,7 @@ if (!fs.existsSync(providersDir)) {
   process.exit(1);
 }
 
-// 1. Strictly filter for .json files (ignores script.bat, filelist.txt, etc.)
+// Strictly process only .json files (ignores temporary scripts, txt files, etc.)
 const files = fs.readdirSync(providersDir).filter((f) => f.endsWith(".json"));
 
 let hasFailures = false;
@@ -200,7 +200,6 @@ for (const file of files) {
 
     // DoT Probes
     if (endpoints.dotHostname) {
-      // If primary IP is private or null, fall back to dotHostname for TLS handshake
       const targetHost =
         endpoints.primaryDns && !isPrivateIp(endpoints.primaryDns)
           ? endpoints.primaryDns
