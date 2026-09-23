@@ -97,7 +97,10 @@ async function testDoh(urlStr) {
     let resolved = false;
     const url = new URL(urlStr);
 
-    const client = http2.connect(url.origin, { timeout: 6000 });
+    const client = http2.connect(url.origin, {
+      timeout: 6000,
+      servername: url.hostname,
+    });
 
     client.on("error", () => {
       if (!resolved) {

@@ -29,7 +29,7 @@
         "secondaryDns": "1.0.0.2",
         "ipv6Primary": "2606:4700:4700::1112",
         "ipv6Secondary": "2606:4700:4700::1002",
-        "dohUrl": "https://1.1.1.2/dns-query",
+        "dohUrl": "https://security.cloudflare-dns.com/dns-query",
         "dotHostname": "security.cloudflare-dns.com"
       },
       "notes": "1.1.1.1 for Families security tier. Blocks known malware and phishing infrastructure."
@@ -44,7 +44,7 @@
         "secondaryDns": "1.0.0.3",
         "ipv6Primary": "2606:4700:4700::1113",
         "ipv6Secondary": "2606:4700:4700::1003",
-        "dohUrl": "https://1.1.1.3/dns-query",
+        "dohUrl": "https://family.cloudflare-dns.com/dns-query",
         "dotHostname": "family.cloudflare-dns.com"
       },
       "notes": "Blocks adult/explicit domains in addition to malware and phishing."
