@@ -15,7 +15,7 @@
         "ipv6Primary": "2a01:4f8:161:7442::2",
         "ipv6Secondary": null,
         "dohUrl": "https://dns.digitalcourage.de/dns-query",
-        "dotHostname": "dns.digitalcourage.de"
+        "dotHostname": "dns3.digitalcourage.de"
       },
       "notes": "Operated by German privacy NGO Digitalcourage. No logging, no censorship, DNSSEC validated."
     }

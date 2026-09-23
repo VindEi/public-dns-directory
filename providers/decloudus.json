@@ -8,24 +8,16 @@
       "id": "default",
       "name": "De-Googling & Privacy Resolver",
       "primaryCategory": "Ad-Blocking",
-      "tags": [
-        "doh",
-        "dot",
-        "ipv4",
-        "ipv6",
-        "adblock",
-        "no-log",
-        "malware-blocking"
-      ],
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
       "endpoints": {
-        "primaryDns": "46.224.208.209",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a01:4f8:1c19:36cd::1",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://dns.decloudus.com/dns-query",
         "dotHostname": "dns.decloudus.com"
       },
-      "notes": "Privacy and de-Googling resolver blocking ads, trackers, profiling telemetry, and big-tech cloud logging."
+      "notes": "Privacy and de-Googling resolver blocking ads, trackers, profiling telemetry, and big-tech cloud logging. Plain port 53 is disabled."
     }
   ]
 }

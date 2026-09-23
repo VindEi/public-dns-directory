@@ -30,7 +30,7 @@
         "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://basic.rethinkdns.com/dns-query",
-        "dotHostname": "basic.rethinkdns.com"
+        "dotHostname": null
       },
       "notes": "Unfiltered raw resolver endpoint hosted across globally distributed edge nodes."
     }

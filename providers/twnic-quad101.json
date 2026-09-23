@@ -15,7 +15,7 @@
         "ipv6Primary": "2001:de4::101",
         "ipv6Secondary": "2001:de4::102",
         "dohUrl": "https://dns.twnic.tw/dns-query",
-        "dotHostname": "101.101.101.101"
+        "dotHostname": "dns.twnic.tw"
       },
       "notes": "Taiwan Network Information Center public recursive resolver. Fast Anycast resolution throughout East Asia."
     }

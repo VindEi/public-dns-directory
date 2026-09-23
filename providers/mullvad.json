@@ -8,131 +8,91 @@
       "id": "unfiltered",
       "name": "Unfiltered",
       "primaryCategory": "General",
-      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "tags": ["doh", "dot", "no-log"],
       "endpoints": {
-        "primaryDns": "194.242.2.2",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a07:e340::2",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://dns.mullvad.net/dns-query",
         "dotHostname": "dns.mullvad.net"
       },
-      "notes": "Zero-log Anycast recursor without blocklists. Service retires November 2, 2026."
+      "notes": "Zero-log Anycast recursor without blocklists. Service retires November 2, 2026. Plain port 53 is disabled."
     },
     {
       "id": "adblock",
       "name": "Ad-Blocking",
       "primaryCategory": "Ad-Blocking",
-      "tags": [
-        "doh",
-        "dot",
-        "ipv4",
-        "ipv6",
-        "adblock",
-        "no-log",
-        "malware-blocking"
-      ],
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
       "endpoints": {
-        "primaryDns": "194.242.2.3",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a07:e340::3",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://adblock.dns.mullvad.net/dns-query",
         "dotHostname": "adblock.dns.mullvad.net"
       },
-      "notes": "Blocks advertising and tracking domains. Service retires November 2, 2026."
+      "notes": "Blocks advertising and tracking domains. Service retires November 2, 2026. Plain port 53 is disabled."
     },
     {
       "id": "base",
       "name": "Base Protection",
       "primaryCategory": "Security",
-      "tags": [
-        "doh",
-        "dot",
-        "ipv4",
-        "ipv6",
-        "adblock",
-        "no-log",
-        "malware-blocking"
-      ],
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
       "endpoints": {
-        "primaryDns": "194.242.2.4",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a07:e340::4",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://base.dns.mullvad.net/dns-query",
         "dotHostname": "base.dns.mullvad.net"
       },
-      "notes": "Blocks ads, trackers, and malicious domains. Service retires November 2, 2026."
+      "notes": "Blocks ads, trackers, and malicious domains. Service retires November 2, 2026. Plain port 53 is disabled."
     },
     {
       "id": "extended",
       "name": "Extended",
       "primaryCategory": "Ad-Blocking",
-      "tags": [
-        "doh",
-        "dot",
-        "ipv4",
-        "ipv6",
-        "adblock",
-        "no-log",
-        "malware-blocking"
-      ],
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
       "endpoints": {
-        "primaryDns": "194.242.2.5",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a07:e340::5",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://extended.dns.mullvad.net/dns-query",
         "dotHostname": "extended.dns.mullvad.net"
       },
-      "notes": "Blocks ads, trackers, malware, and social media tracking. Service retires November 2, 2026."
+      "notes": "Blocks ads, trackers, malware, and social media tracking. Service retires November 2, 2026. Plain port 53 is disabled."
     },
     {
       "id": "family",
       "name": "Family",
       "primaryCategory": "Family",
-      "tags": [
-        "doh",
-        "dot",
-        "ipv4",
-        "ipv6",
-        "adblock",
-        "no-log",
-        "malware-blocking"
-      ],
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
       "endpoints": {
-        "primaryDns": "194.242.2.6",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a07:e340::6",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://family.dns.mullvad.net/dns-query",
         "dotHostname": "family.dns.mullvad.net"
       },
-      "notes": "Blocks adult content, gambling, malware, ads, and trackers. Service retires November 2, 2026."
+      "notes": "Blocks adult content, gambling, malware, ads, and trackers. Service retires November 2, 2026. Plain port 53 is disabled."
     },
     {
       "id": "all",
       "name": "All Filtered",
       "primaryCategory": "Family",
-      "tags": [
-        "doh",
-        "dot",
-        "ipv4",
-        "ipv6",
-        "adblock",
-        "no-log",
-        "malware-blocking"
-      ],
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
       "endpoints": {
-        "primaryDns": "194.242.2.9",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a07:e340::9",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://all.dns.mullvad.net/dns-query",
         "dotHostname": "all.dns.mullvad.net"
       },
-      "notes": "Maximum filtering: ads, trackers, malware, adult content, gambling, and social media. Service retires November 2, 2026."
+      "notes": "Maximum filtering: ads, trackers, malware, adult content, gambling, and social media. Service retires November 2, 2026. Plain port 53 is disabled."
     }
   ]
 }

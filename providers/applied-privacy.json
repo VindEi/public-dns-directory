@@ -8,16 +8,16 @@
       "id": "default",
       "name": "Privacy Resolver",
       "primaryCategory": "General",
-      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "tags": ["doh", "dot", "no-log"],
       "endpoints": {
-        "primaryDns": "146.255.56.98",
+        "primaryDns": null,
         "secondaryDns": null,
-        "ipv6Primary": "2a02:1680:1e:3052::98",
+        "ipv6Primary": null,
         "ipv6Secondary": null,
         "dohUrl": "https://doh.applied-privacy.net/query",
         "dotHostname": "dot.applied-privacy.net"
       },
-      "notes": "Austrian non-profit promoting digital privacy and uncensored encrypted DNS."
+      "notes": "Austrian non-profit promoting digital privacy and uncensored encrypted DNS. Plain port 53 is disabled."
     }
   ]
 }
