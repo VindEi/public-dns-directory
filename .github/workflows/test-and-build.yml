@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 4 * * *' # Daily at 04:00 UTC
+    - cron: "0 4 * * *" # Daily at 04:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -28,11 +28,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 22
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run Schema and Resolver Tests
         run: npm test
