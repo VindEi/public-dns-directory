@@ -11,7 +11,7 @@
       "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
       "endpoints": {
         "primaryDns": "5.1.66.255",
-        "secondaryDns": "185.150.17.255",
+        "secondaryDns": null,
         "ipv6Primary": "2001:678:e68:f000::",
         "ipv6Secondary": "2001:678:ed0:f000::",
         "dohUrl": "https://doh.ffmuc.net/dns-query",

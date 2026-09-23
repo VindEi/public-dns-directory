@@ -8,16 +8,16 @@
       "id": "default",
       "name": "Anycast Uncensored",
       "primaryCategory": "General",
-      "tags": ["dot", "ipv4", "ipv6", "no-log"],
+      "tags": ["dot", "no-log"],
       "endpoints": {
-        "primaryDns": "91.239.100.100",
-        "secondaryDns": "89.233.43.71",
-        "ipv6Primary": "2001:67c:28a4::",
-        "ipv6Secondary": "2a01:3a0:53:53::",
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
         "dohUrl": null,
         "dotHostname": "anycast.uncensoreddns.org"
       },
-      "notes": "Non-profit Danish open recursive resolver operating without censorship, logging, or redirects."
+      "notes": "Non-profit Danish open recursive resolver. Plain port 53 is disabled; operates strictly via DoT."
     }
   ]
 }

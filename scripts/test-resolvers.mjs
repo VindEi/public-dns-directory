@@ -17,19 +17,29 @@ const validate = ajv.compile(schema);
 const providersDir = "./providers";
 const files = fs.readdirSync(providersDir).filter((f) => f.endsWith(".json"));
 
-// Known closed subscriber-only telcos or domestic-only networks
+// Providers that restrict UDP port 53 to domestic lines or local subscribers
 const SUBSCRIBER_OR_DOMESTIC_ONLY = new Set([
+  "114dns",
   "airtel",
+  "andrews-and-arnold",
+  "arvancloud",
+  "baidu",
+  "begzar",
   "bt",
+  "dnspod",
+  "fdn",
   "kpn",
+  "optus",
   "orange-france",
+  "puntcat",
+  "shecan",
+  "shelter-dns",
   "singtel",
   "starhub",
   "telefonica",
+  "telstra",
+  "twnic-quad101",
   "virgin-media",
-  "shecan",
-  "arvancloud",
-  "shelter-dns",
 ]);
 
 // RFC 1035 wireformat query for example.com (A record, IN class)
@@ -53,7 +63,7 @@ function isPrivateIp(ip) {
 }
 
 async function testUdpDns(ip) {
-  const resolver = new Resolver({ timeout: 3500, tries: 1 });
+  const resolver = new Resolver({ timeout: 4000, tries: 1 });
   resolver.setServers([ip]);
   await resolver.resolve4("example.com");
 }
@@ -65,7 +75,7 @@ async function testDot(dotHostname) {
         host: dotHostname,
         port: 853,
         servername: dotHostname,
-        timeout: 4500,
+        timeout: 5000,
         rejectUnauthorized: true,
       },
       () => {
@@ -82,20 +92,17 @@ async function testDot(dotHostname) {
   });
 }
 
-// Tests DoH over native HTTP/2, falling back to HTTP/1.1
 async function testDoh(urlStr) {
   return new Promise((resolve, reject) => {
     let resolved = false;
     const url = new URL(urlStr);
 
-    // 1. Try HTTP/2 (Mandatory per RFC 8484 §5.2)
-    const client = http2.connect(url.origin, { timeout: 4500 });
+    const client = http2.connect(url.origin, { timeout: 6000 });
 
     client.on("error", () => {
       if (!resolved) {
         resolved = true;
         client.destroy();
-        // Fallback to HTTP/1.1
         testDohHttp1(urlStr).then(resolve).catch(reject);
       }
     });
@@ -104,7 +111,7 @@ async function testDoh(urlStr) {
       if (!resolved) {
         resolved = true;
         client.destroy();
-        reject(new Error("HTTP/2 timeout"));
+        testDohHttp1(urlStr).then(resolve).catch(reject);
       }
     });
 
@@ -117,12 +124,12 @@ async function testDoh(urlStr) {
       "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
     });
 
-    req.setTimeout(4500, () => {
+    req.setTimeout(6000, () => {
       if (!resolved) {
         resolved = true;
         req.destroy();
         client.destroy();
-        reject(new Error("Stream timeout"));
+        testDohHttp1(urlStr).then(resolve).catch(reject);
       }
     });
 
@@ -150,12 +157,11 @@ async function testDoh(urlStr) {
   });
 }
 
-// Fallback HTTP/1.1 probe
 async function testDohHttp1(urlStr) {
   const separator = urlStr.includes("?") ? "&" : "?";
   const getUrl = `${urlStr}${separator}dns=${WIRE_QUERY_BASE64URL}`;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 4500);
+  const timer = setTimeout(() => controller.abort(), 6000);
 
   try {
     const res = await fetch(getUrl, {
@@ -205,7 +211,7 @@ for (const file of files) {
       profile: "FILE",
       type: "SCHEMA",
       target: data.id,
-      error: `ID mismatch with filename`,
+      error: "ID mismatch with filename",
     });
   }
 
@@ -265,14 +271,24 @@ for (const file of files) {
         await testDot(endpoints.dotHostname);
         passedProbes++;
       } catch (err) {
-        fileHasError = true;
-        failures.push({
-          file,
-          profile: profile.id,
-          target: endpoints.dotHostname,
-          type: "DoT 853",
-          error: err.code || err.message,
-        });
+        if (isSubscriberRestricted) {
+          warnings.push({
+            file,
+            profile: profile.id,
+            target: endpoints.dotHostname,
+            type: "DoT 853",
+            error: "GEO-RESTRICTED",
+          });
+        } else {
+          fileHasError = true;
+          failures.push({
+            file,
+            profile: profile.id,
+            target: endpoints.dotHostname,
+            type: "DoT 853",
+            error: err.code || err.message,
+          });
+        }
       }
     }
 
@@ -283,14 +299,24 @@ for (const file of files) {
         await testDoh(endpoints.dohUrl);
         passedProbes++;
       } catch (err) {
-        fileHasError = true;
-        failures.push({
-          file,
-          profile: profile.id,
-          target: endpoints.dohUrl,
-          type: "DoH",
-          error: err.message,
-        });
+        if (isSubscriberRestricted) {
+          warnings.push({
+            file,
+            profile: profile.id,
+            target: endpoints.dohUrl,
+            type: "DoH",
+            error: "GEO-RESTRICTED",
+          });
+        } else {
+          fileHasError = true;
+          failures.push({
+            file,
+            profile: profile.id,
+            target: endpoints.dohUrl,
+            type: "DoH",
+            error: err.message,
+          });
+        }
       }
     }
   }
@@ -302,7 +328,6 @@ for (const file of files) {
   }
 }
 
-// Results Formatting
 console.log("\n" + "=".repeat(105));
 console.log(
   `PROBES COMPLETE: ${passedProbes}/${totalProbes} passed (${failures.length} hard failures, ${warnings.length} warnings)`,

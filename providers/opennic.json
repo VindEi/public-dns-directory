@@ -8,16 +8,16 @@
       "id": "anycast",
       "name": "Alternative Root Anycast",
       "primaryCategory": "General",
-      "tags": ["ipv4", "ipv6", "bypass"],
+      "tags": ["ipv4", "bypass"],
       "endpoints": {
-        "primaryDns": "185.121.177.177",
-        "secondaryDns": "169.239.202.202",
-        "ipv6Primary": "2a05:dfc7:5::53",
-        "ipv6Secondary": "2a05:dfc7:5::54",
+        "primaryDns": "134.195.4.2",
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
         "dohUrl": null,
         "dotHostname": null
       },
-      "notes": "Democratic alternative root DNS system resolving both ICANN domains and non-standard TLDs (.bbs, .chan, .pirate, etc.)."
+      "notes": "Democratic alternative root DNS system resolving ICANN domains and non-standard TLDs."
     }
   ]
 }
