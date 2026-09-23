@@ -1,0 +1,53 @@
+{
+  "id": "dns4eu",
+  "name": "DNS4EU",
+  "website": "https://joindns4.eu",
+  "country": "EU",
+  "profiles": [
+    {
+      "id": "protective",
+      "name": "Protective Resolution",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "86.54.11.1",
+        "secondaryDns": "86.54.11.201",
+        "ipv6Primary": "2a13:1001::86:54:11:1",
+        "ipv6Secondary": null,
+        "dohUrl": "https://protective.joindns4.eu/dns-query",
+        "dotHostname": "protective.joindns4.eu"
+      },
+      "notes": "EU-funded sovereign DNS initiative. Protective profile filtering malware and phishing threats."
+    },
+    {
+      "id": "child-protection",
+      "name": "Child Protection",
+      "primaryCategory": "Family",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "86.54.11.12",
+        "secondaryDns": "86.54.11.212",
+        "ipv6Primary": "2a13:1001::86:54:11:12",
+        "ipv6Secondary": null,
+        "dohUrl": "https://child.joindns4.eu/dns-query",
+        "dotHostname": "child.joindns4.eu"
+      },
+      "notes": "Filters adult content, narcotics, and dangerous materials alongside malware threat feeds."
+    },
+    {
+      "id": "unfiltered",
+      "name": "Unfiltered Resolution",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "86.54.11.100",
+        "secondaryDns": "86.54.11.200",
+        "ipv6Primary": "2a13:1001::86:54:11:100",
+        "ipv6Secondary": null,
+        "dohUrl": "https://unfiltered.joindns4.eu/dns-query",
+        "dotHostname": "unfiltered.joindns4.eu"
+      },
+      "notes": "Raw EU-sovereign recursive resolver without content or threat filtering."
+    }
+  ]
+}

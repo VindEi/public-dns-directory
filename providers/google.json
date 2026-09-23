@@ -1,0 +1,23 @@
+{
+  "id": "google",
+  "name": "Google Public DNS",
+  "website": "https://developers.google.com/speed/public-dns",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Anycast Recursor",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6"],
+      "endpoints": {
+        "primaryDns": "8.8.8.8",
+        "secondaryDns": "8.8.4.4",
+        "ipv6Primary": "2001:4860:4860::8888",
+        "ipv6Secondary": "2001:4860:4860::8844",
+        "dohUrl": "https://dns.google/dns-query",
+        "dotHostname": "dns.google"
+      },
+      "notes": "Global Anycast recursive resolver with strict DNSSEC validation."
+    }
+  ]
+}

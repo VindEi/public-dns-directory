@@ -1,0 +1,138 @@
+{
+  "id": "mullvad",
+  "name": "Mullvad Public DNS",
+  "website": "https://mullvad.net/help/dns-over-https-and-dns-over-tls",
+  "country": "SE",
+  "profiles": [
+    {
+      "id": "unfiltered",
+      "name": "Unfiltered",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "194.242.2.2",
+        "secondaryDns": null,
+        "ipv6Primary": "2a07:e340::2",
+        "ipv6Secondary": null,
+        "dohUrl": "https://dns.mullvad.net/dns-query",
+        "dotHostname": "dns.mullvad.net"
+      },
+      "notes": "Zero-log Anycast recursor without blocklists. Service retires November 2, 2026."
+    },
+    {
+      "id": "adblock",
+      "name": "Ad-Blocking",
+      "primaryCategory": "Ad-Blocking",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "194.242.2.3",
+        "secondaryDns": null,
+        "ipv6Primary": "2a07:e340::3",
+        "ipv6Secondary": null,
+        "dohUrl": "https://adblock.dns.mullvad.net/dns-query",
+        "dotHostname": "adblock.dns.mullvad.net"
+      },
+      "notes": "Blocks advertising and tracking domains. Service retires November 2, 2026."
+    },
+    {
+      "id": "base",
+      "name": "Base Protection",
+      "primaryCategory": "Security",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "194.242.2.4",
+        "secondaryDns": null,
+        "ipv6Primary": "2a07:e340::4",
+        "ipv6Secondary": null,
+        "dohUrl": "https://base.dns.mullvad.net/dns-query",
+        "dotHostname": "base.dns.mullvad.net"
+      },
+      "notes": "Blocks ads, trackers, and malicious domains. Service retires November 2, 2026."
+    },
+    {
+      "id": "extended",
+      "name": "Extended",
+      "primaryCategory": "Ad-Blocking",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "194.242.2.5",
+        "secondaryDns": null,
+        "ipv6Primary": "2a07:e340::5",
+        "ipv6Secondary": null,
+        "dohUrl": "https://extended.dns.mullvad.net/dns-query",
+        "dotHostname": "extended.dns.mullvad.net"
+      },
+      "notes": "Blocks ads, trackers, malware, and social media tracking. Service retires November 2, 2026."
+    },
+    {
+      "id": "family",
+      "name": "Family",
+      "primaryCategory": "Family",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "194.242.2.6",
+        "secondaryDns": null,
+        "ipv6Primary": "2a07:e340::6",
+        "ipv6Secondary": null,
+        "dohUrl": "https://family.dns.mullvad.net/dns-query",
+        "dotHostname": "family.dns.mullvad.net"
+      },
+      "notes": "Blocks adult content, gambling, malware, ads, and trackers. Service retires November 2, 2026."
+    },
+    {
+      "id": "all",
+      "name": "All Filtered",
+      "primaryCategory": "Family",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "194.242.2.9",
+        "secondaryDns": null,
+        "ipv6Primary": "2a07:e340::9",
+        "ipv6Secondary": null,
+        "dohUrl": "https://all.dns.mullvad.net/dns-query",
+        "dotHostname": "all.dns.mullvad.net"
+      },
+      "notes": "Maximum filtering: ads, trackers, malware, adult content, gambling, and social media. Service retires November 2, 2026."
+    }
+  ]
+}

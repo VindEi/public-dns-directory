@@ -1,0 +1,23 @@
+{
+  "id": "handshake-hdns",
+  "name": "Handshake HDNS",
+  "website": "https://hdns.io",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Decentralized Root Resolver",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "bypass"],
+      "endpoints": {
+        "primaryDns": "103.196.38.38",
+        "secondaryDns": "103.196.38.39",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://hdns.io/dns-query",
+        "dotHostname": "hdns.io"
+      },
+      "notes": "Decentralized naming protocol recursor resolving both blockchain-native Handshake TLDs and standard ICANN domains."
+    }
+  ]
+}

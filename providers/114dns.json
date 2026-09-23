@@ -1,0 +1,53 @@
+{
+  "id": "114dns",
+  "name": "114DNS",
+  "website": "https://www.114dns.com",
+  "country": "CN",
+  "profiles": [
+    {
+      "id": "standard",
+      "name": "Standard (Unfiltered)",
+      "primaryCategory": "General",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "114.114.114.114",
+        "secondaryDns": "114.114.115.115",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Longstanding high-capacity public DNS provider in China with nationwide telecom interconnects."
+    },
+    {
+      "id": "safe",
+      "name": "Safe (Malware Blocking)",
+      "primaryCategory": "Security",
+      "tags": ["ipv4", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "114.114.114.119",
+        "secondaryDns": "114.114.115.119",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Blocks phishing domains, trojans, malicious fraud schemes, and scam portals."
+    },
+    {
+      "id": "family",
+      "name": "Family Protection",
+      "primaryCategory": "Family",
+      "tags": ["ipv4", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "114.114.114.110",
+        "secondaryDns": "114.114.115.110",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Filters adult content, pornography, and malicious websites."
+    }
+  ]
+}

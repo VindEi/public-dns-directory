@@ -1,0 +1,31 @@
+{
+  "id": "dns-forge",
+  "name": "DNS Forge",
+  "website": "https://dnsforge.de",
+  "country": "DE",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Ad & Tracker Blocking Resolver",
+      "primaryCategory": "Ad-Blocking",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "176.9.93.198",
+        "secondaryDns": "176.9.1.117",
+        "ipv6Primary": "2a01:4f8:151:34aa::198",
+        "ipv6Secondary": "2a01:4f8:141:316d::117",
+        "dohUrl": "https://dnsforge.de/dns-query",
+        "dotHostname": "dnsforge.de"
+      },
+      "notes": "Independent German privacy resolver. Filters ads, trackers, and malware with zero logging."
+    }
+  ]
+}

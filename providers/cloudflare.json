@@ -1,16 +1,53 @@
 {
   "id": "cloudflare",
-  "name": "Cloudflare (1.1.1.1)",
+  "name": "Cloudflare DNS",
   "website": "https://1.1.1.1",
   "country": "GLOBAL",
-  "primaryCategory": "General",
-  "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
-  "endpoints": {
-    "primaryDns": "1.1.1.1",
-    "secondaryDns": "1.0.0.1",
-    "ipv6Primary": "2606:4700:4700::1111",
-    "ipv6Secondary": "2606:4700:4700::1001",
-    "dohUrl": "https://cloudflare-dns.com/dns-query",
-    "dotHostname": "cloudflare-dns.com"
-  }
+  "profiles": [
+    {
+      "id": "standard",
+      "name": "Standard (Unfiltered)",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "1.1.1.1",
+        "secondaryDns": "1.0.0.1",
+        "ipv6Primary": "2606:4700:4700::1111",
+        "ipv6Secondary": "2606:4700:4700::1001",
+        "dohUrl": "https://cloudflare-dns.com/dns-query",
+        "dotHostname": "one.one.one.one"
+      },
+      "notes": "Fastest global Anycast resolver. Raw and unfiltered."
+    },
+    {
+      "id": "security",
+      "name": "Malware Blocking",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "1.1.1.2",
+        "secondaryDns": "1.0.0.2",
+        "ipv6Primary": "2606:4700:4700::1112",
+        "ipv6Secondary": "2606:4700:4700::1002",
+        "dohUrl": "https://security.cloudflare-dns.com/dns-query",
+        "dotHostname": "security.cloudflare-dns.com"
+      },
+      "notes": "1.1.1.1 for Families security tier. Blocks known malware and phishing infrastructure."
+    },
+    {
+      "id": "family",
+      "name": "Family / Adult Content Blocking",
+      "primaryCategory": "Family",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "1.1.1.3",
+        "secondaryDns": "1.0.0.3",
+        "ipv6Primary": "2606:4700:4700::1113",
+        "ipv6Secondary": "2606:4700:4700::1003",
+        "dohUrl": "https://family.cloudflare-dns.com/dns-query",
+        "dotHostname": "family.cloudflare-dns.com"
+      },
+      "notes": "Blocks adult/explicit domains in addition to malware and phishing."
+    }
+  ]
 }

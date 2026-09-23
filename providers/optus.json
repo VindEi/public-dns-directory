@@ -1,0 +1,23 @@
+{
+  "id": "optus",
+  "name": "Optus",
+  "website": "https://www.optus.com.au",
+  "country": "AU",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Recursor",
+      "primaryCategory": "Regional",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "211.29.132.12",
+        "secondaryDns": "198.142.0.51",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Optus telecommunications primary recursive caching nameservers across Australia. Enforces Federal Court copyright blocks."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "yandex",
+  "name": "Yandex DNS",
+  "website": "https://dns.yandex.com",
+  "country": "RU",
+  "profiles": [
+    {
+      "id": "basic",
+      "name": "Basic (Unfiltered)",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6"],
+      "endpoints": {
+        "primaryDns": "77.88.8.8",
+        "secondaryDns": "77.88.8.1",
+        "ipv6Primary": "2a02:6b8::feed:0ff",
+        "ipv6Secondary": "2a02:6b8:0:1::feed:0ff",
+        "dohUrl": "https://common.dot.dns.yandex.net/dns-query",
+        "dotHostname": "common.dot.dns.yandex.net"
+      },
+      "notes": "Standard high-speed recursive resolution without traffic filtering."
+    },
+    {
+      "id": "safe",
+      "name": "Safe (Malware Blocking)",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "77.88.8.88",
+        "secondaryDns": "77.88.8.2",
+        "ipv6Primary": "2a02:6b8::feed:bad",
+        "ipv6Secondary": "2a02:6b8:0:1::feed:bad",
+        "dohUrl": "https://safe.dot.dns.yandex.net/dns-query",
+        "dotHostname": "safe.dot.dns.yandex.net"
+      },
+      "notes": "Blocks known infected and fraudulent web addresses, malware, and botnet infrastructure."
+    },
+    {
+      "id": "family",
+      "name": "Family",
+      "primaryCategory": "Family",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "77.88.8.7",
+        "secondaryDns": "77.88.8.3",
+        "ipv6Primary": "2a02:6b8::feed:a11",
+        "ipv6Secondary": "2a02:6b8:0:1::feed:a11",
+        "dohUrl": "https://family.dot.dns.yandex.net/dns-query",
+        "dotHostname": "family.dot.dns.yandex.net"
+      },
+      "notes": "Blocks adult websites, illicit materials, and malware, while enabling safe search."
+    }
+  ]
+}

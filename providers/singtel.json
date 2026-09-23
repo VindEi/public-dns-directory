@@ -1,0 +1,23 @@
+{
+  "id": "singtel",
+  "name": "Singtel",
+  "website": "https://www.singtel.com",
+  "country": "SG",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Recursor",
+      "primaryCategory": "Regional",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "165.21.83.88",
+        "secondaryDns": "165.21.100.88",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "SingNet primary and secondary nationwide DNS caching resolvers across Singapore. Enforces IMDA regulatory web filtering."
+    }
+  ]
+}

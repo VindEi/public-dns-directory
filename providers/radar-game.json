@@ -1,0 +1,23 @@
+{
+  "id": "radar-game",
+  "name": "Radar Game",
+  "website": "https://radar.game",
+  "country": "IR",
+  "profiles": [
+    {
+      "id": "gaming",
+      "name": "Gaming Optimization & Sanction Bypass",
+      "primaryCategory": "Gaming",
+      "tags": ["ipv4", "bypass"],
+      "endpoints": {
+        "primaryDns": "10.202.10.10",
+        "secondaryDns": "10.202.10.11",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Regional game optimization and anti-sanction DNS reducing packet loss and routing game authentication services. Accessible only within Iranian networks."
+    }
+  ]
+}

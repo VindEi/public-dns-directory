@@ -1,0 +1,23 @@
+{
+  "id": "lg-uplus",
+  "name": "LG Uplus",
+  "website": "https://www.lguplus.com",
+  "country": "KR",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Recursor",
+      "primaryCategory": "Regional",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "164.124.101.2",
+        "secondaryDns": "203.248.252.2",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "LG U+ national recursive DNS infrastructure (formerly Dacom/Powercomm). Enforces domestic KCSC regulatory website filtering."
+    }
+  ]
+}

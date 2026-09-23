@@ -1,0 +1,68 @@
+{
+  "id": "bebasdns",
+  "name": "BebasDNS (BebasID)",
+  "website": "https://bebasid.com",
+  "country": "ID",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Default (Ad & Malware Blocking)",
+      "primaryCategory": "Ad-Blocking",
+      "tags": ["doh", "dot", "adblock", "bypass", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://dns.bebasid.com/dns-query",
+        "dotHostname": "dns.bebasid.com"
+      },
+      "notes": "Indonesian internet freedom project resolver designed to bypass ISP filtering while blocking ads and trackers."
+    },
+    {
+      "id": "security",
+      "name": "Security (Malware Only)",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "bypass", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://security.dns.bebasid.com/dns-query",
+        "dotHostname": "security.dns.bebasid.com"
+      },
+      "notes": "Blocks malware and phishing hosts without applying ad-blocking rules."
+    },
+    {
+      "id": "family",
+      "name": "Family (Internet Sehat)",
+      "primaryCategory": "Family",
+      "tags": ["doh", "dot", "adblock", "bypass", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://internetsehat.bebasid.com/dns-query",
+        "dotHostname": "internetsehat.bebasid.com"
+      },
+      "notes": "Blocks adult websites, pornographic content, and gambling domains alongside malware."
+    },
+    {
+      "id": "unfiltered",
+      "name": "Unfiltered",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "bypass"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://dns.bebasid.com/unfiltered",
+        "dotHostname": "unfiltered.dns.bebasid.com"
+      },
+      "notes": "Raw recursive resolution without ad-blocking or category rules applied."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "shelter-dns",
+  "name": "Shelter DNS",
+  "website": "https://shelter.ir",
+  "country": "IR",
+  "profiles": [
+    {
+      "id": "gaming",
+      "name": "Gaming & Sanction Bypass",
+      "primaryCategory": "Gaming",
+      "tags": ["ipv4", "bypass"],
+      "endpoints": {
+        "primaryDns": "94.103.125.157",
+        "secondaryDns": "94.103.125.158",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Regional gaming and anti-sanction DNS proxy targeting game client connectivity, downloads, and matchmaking bans."
+    }
+  ]
+}

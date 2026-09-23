@@ -1,0 +1,38 @@
+{
+  "id": "openbld",
+  "name": "OpenBLD.net",
+  "website": "https://openbld.net",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "ada",
+      "name": "Adaptive (ADA)",
+      "primaryCategory": "Ad-Blocking",
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://ada.openbld.net/dns-query",
+        "dotHostname": "ada.openbld.net"
+      },
+      "notes": "Adaptive profile balancing ad/tracker and malware blocking while preventing breakage across common services and social media."
+    },
+    {
+      "id": "ric",
+      "name": "Strict (RIC)",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://ric.openbld.net/dns-query",
+        "dotHostname": "ric.openbld.net"
+      },
+      "notes": "Strict profile aggressively filtering tracking telemetry, analytics, invasive advertising, and known threats."
+    }
+  ]
+}

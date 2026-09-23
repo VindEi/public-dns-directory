@@ -1,0 +1,53 @@
+{
+  "id": "quad9",
+  "name": "Quad9",
+  "website": "https://quad9.net",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "secured",
+      "name": "Secured (Malware Blocking + DNSSEC)",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "9.9.9.9",
+        "secondaryDns": "149.112.112.112",
+        "ipv6Primary": "2620:fe::fe",
+        "ipv6Secondary": "2620:fe::9",
+        "dohUrl": "https://dns.quad9.net/dns-query",
+        "dotHostname": "dns.quad9.net"
+      },
+      "notes": "Swiss non-profit foundation. Blocks malicious domains via real-time threat intelligence feeds."
+    },
+    {
+      "id": "unsecured",
+      "name": "Unsecured (Unfiltered)",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "9.9.9.10",
+        "secondaryDns": "149.112.112.10",
+        "ipv6Primary": "2620:fe::10",
+        "ipv6Secondary": "2620:fe::fe:10",
+        "dohUrl": "https://dns10.quad9.net/dns-query",
+        "dotHostname": "dns10.quad9.net"
+      },
+      "notes": "Quad9 raw recursor without threat intelligence blocking or DNSSEC validation enforcement."
+    },
+    {
+      "id": "secured-ecs",
+      "name": "Secured w/ ECS",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "9.9.9.11",
+        "secondaryDns": "149.112.112.11",
+        "ipv6Primary": "2620:fe::11",
+        "ipv6Secondary": "2620:fe::fe:11",
+        "dohUrl": "https://dns11.quad9.net/dns-query",
+        "dotHostname": "dns11.quad9.net"
+      },
+      "notes": "Includes malware blocking and DNSSEC validation, while forwarding EDNS Client Subnet (ECS) metadata to authoritative nameservers for optimized CDN routing."
+    }
+  ]
+}

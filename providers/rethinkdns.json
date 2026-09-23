@@ -1,0 +1,38 @@
+{
+  "id": "rethinkdns",
+  "name": "RethinkDNS",
+  "website": "https://rethinkdns.com",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "max",
+      "name": "Max Protection",
+      "primaryCategory": "Ad-Blocking",
+      "tags": ["doh", "dot", "adblock", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://max.rethinkdns.com/dns-query",
+        "dotHostname": "max.rethinkdns.com"
+      },
+      "notes": "Open-source global Anycast DoH/DoT resolver running curated blocklists against malware, spyware, and advertising."
+    },
+    {
+      "id": "basic",
+      "name": "Basic (Unfiltered)",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "no-log"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://basic.rethinkdns.com/dns-query",
+        "dotHostname": "basic.rethinkdns.com"
+      },
+      "notes": "Unfiltered raw resolver endpoint hosted across globally distributed edge nodes."
+    }
+  ]
+}

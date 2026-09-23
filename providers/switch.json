@@ -1,0 +1,23 @@
+{
+  "id": "switch",
+  "name": "SWITCH DNS",
+  "website": "https://portal.switch.ch/pub/public-dns/",
+  "country": "CH",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Academic Encrypted Recursor",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "no-log"],
+      "endpoints": {
+        "primaryDns": null,
+        "secondaryDns": null,
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": "https://dns.switch.ch/dns-query",
+        "dotHostname": "dns.switch.ch"
+      },
+      "notes": "Swiss academic and research network public resolver. Accessible strictly via DoH and DoT (plain port 53 is disabled). Enforces Swiss gaming blocklists."
+    }
+  ]
+}

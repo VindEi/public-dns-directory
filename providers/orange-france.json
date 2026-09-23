@@ -1,0 +1,23 @@
+{
+  "id": "orange-france",
+  "name": "Orange France",
+  "website": "https://www.orange.fr",
+  "country": "FR",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Recursor",
+      "primaryCategory": "Regional",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "80.10.246.2",
+        "secondaryDns": "80.10.246.129",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Orange S.A. primary transit and consumer recursive nameservers in France. Enforces ARCOM judicial domain blocks."
+    }
+  ]
+}

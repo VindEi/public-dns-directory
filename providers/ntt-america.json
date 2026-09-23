@@ -1,0 +1,23 @@
+{
+  "id": "ntt-america",
+  "name": "NTT America (Global IP Network)",
+  "website": "https://gin.ntt.net",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "GIN Open Recursor",
+      "primaryCategory": "General",
+      "tags": ["ipv4", "ipv6"],
+      "endpoints": {
+        "primaryDns": "129.250.35.250",
+        "secondaryDns": "129.250.35.251",
+        "ipv6Primary": "2001:418:3ff::53",
+        "ipv6Secondary": "2001:418:3ff::1:53",
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Tier-1 Global IP Network Anycast open recursive resolvers run by NTT (x.ns.gin.ntt.net / y.ns.gin.ntt.net). Plain UDP/TCP port 53 only."
+    }
+  ]
+}

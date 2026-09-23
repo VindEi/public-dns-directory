@@ -1,0 +1,23 @@
+{
+  "id": "dnspod",
+  "name": "Tencent DNSPod Public DNS",
+  "website": "https://www.dnspod.cn/products/publicdns",
+  "country": "CN",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Resolver",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6"],
+      "endpoints": {
+        "primaryDns": "119.29.29.29",
+        "secondaryDns": "1.12.12.12",
+        "ipv6Primary": "2402:4e00::",
+        "ipv6Secondary": null,
+        "dohUrl": "https://doh.pub/dns-query",
+        "dotHostname": "dot.pub"
+      },
+      "notes": "Tencent Anycast public resolver with BGP routing across Chinese and international POPs."
+    }
+  ]
+}

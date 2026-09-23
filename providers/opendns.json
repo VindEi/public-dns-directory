@@ -1,0 +1,38 @@
+{
+  "id": "opendns",
+  "name": "Cisco Umbrella (OpenDNS)",
+  "website": "https://www.opendns.com",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "standard",
+      "name": "Standard Protective",
+      "primaryCategory": "Security",
+      "tags": ["doh", "ipv4", "ipv6", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "208.67.222.222",
+        "secondaryDns": "208.67.220.220",
+        "ipv6Primary": "2620:119:35::35",
+        "ipv6Secondary": "2620:119:53::53",
+        "dohUrl": "https://doh.opendns.com/dns-query",
+        "dotHostname": null
+      },
+      "notes": "Cisco-operated standard recursive resolver with phishing and botnet blocking."
+    },
+    {
+      "id": "familyshield",
+      "name": "FamilyShield",
+      "primaryCategory": "Family",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "208.67.222.123",
+        "secondaryDns": "208.67.220.123",
+        "ipv6Primary": "2620:119:35::123",
+        "ipv6Secondary": "2620:119:53::123",
+        "dohUrl": "https://doh.familyshield.opendns.com/dns-query",
+        "dotHostname": "familyshield.opendns.com"
+      },
+      "notes": "Pre-configured OpenDNS resolver that automatically blocks explicit adult material."
+    }
+  ]
+}

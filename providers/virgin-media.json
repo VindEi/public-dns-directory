@@ -1,0 +1,23 @@
+{
+  "id": "virgin-media",
+  "name": "Virgin Media",
+  "website": "https://www.virginmedia.com",
+  "country": "GB",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Recursor",
+      "primaryCategory": "Regional",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "194.168.4.100",
+        "secondaryDns": "194.168.8.100",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Virgin Media core nationwide recursive caching resolvers (cache1/cache2.service.virginmedia.net). Enforces UK High Court copyright and IWF blocks."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "arvancloud",
+  "name": "ArvanCloud DNS",
+  "website": "https://www.arvancloud.ir",
+  "country": "IR",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Anycast",
+      "primaryCategory": "Regional",
+      "tags": ["ipv4"],
+      "endpoints": {
+        "primaryDns": "185.143.232.232",
+        "secondaryDns": "185.143.233.233",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Public Anycast resolver operated across ArvanCloud domestic edge Points of Presence in Iran."
+    }
+  ]
+}

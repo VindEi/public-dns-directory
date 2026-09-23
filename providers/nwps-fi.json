@@ -1,0 +1,84 @@
+{
+  "id": "nwps-fi",
+  "name": "NWPS.fi",
+  "website": "https://nwps.fi",
+  "country": "FI",
+  "profiles": [
+    {
+      "id": "public",
+      "name": "Public (Ad & Malware Blocking)",
+      "primaryCategory": "Ad-Blocking",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "95.217.11.63",
+        "secondaryDns": null,
+        "ipv6Primary": "2a01:4f9:c012:25a0::1",
+        "ipv6Secondary": null,
+        "dohUrl": "https://public.ns.nwps.fi/dns-query",
+        "dotHostname": "public.ns.nwps.fi"
+      },
+      "notes": "Filters advertisements, analytics trackers, spam, and malware with full DNSSEC enforcement."
+    },
+    {
+      "id": "kids",
+      "name": "Kids Protection",
+      "primaryCategory": "Family",
+      "tags": [
+        "doh",
+        "dot",
+        "ipv4",
+        "ipv6",
+        "adblock",
+        "no-log",
+        "malware-blocking"
+      ],
+      "endpoints": {
+        "primaryDns": "135.181.103.31",
+        "secondaryDns": null,
+        "ipv6Primary": "2a01:4f9:c011:aa31::1",
+        "ipv6Secondary": null,
+        "dohUrl": "https://kids.ns.nwps.fi/dns-query",
+        "dotHostname": "kids.ns.nwps.fi"
+      },
+      "notes": "Filters adult content, pornography, and malicious infrastructure in addition to ad-blocking."
+    },
+    {
+      "id": "protective",
+      "name": "Protective (Malware Only)",
+      "primaryCategory": "Security",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log", "malware-blocking"],
+      "endpoints": {
+        "primaryDns": "95.217.244.160",
+        "secondaryDns": null,
+        "ipv6Primary": "2a01:4f9:c012:25a0::2",
+        "ipv6Secondary": null,
+        "dohUrl": "https://protective.ns.nwps.fi/dns-query",
+        "dotHostname": "protective.ns.nwps.fi"
+      },
+      "notes": "Protects against phishing, command-and-control, and malware without blocking ads."
+    },
+    {
+      "id": "unfiltered",
+      "name": "Unfiltered",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "95.216.178.84",
+        "secondaryDns": null,
+        "ipv6Primary": "2a01:4f9:c012:25a0::3",
+        "ipv6Secondary": null,
+        "dohUrl": "https://unfiltered.ns.nwps.fi/dns-query",
+        "dotHostname": "unfiltered.ns.nwps.fi"
+      },
+      "notes": "Raw recursive resolver without blocklists applied."
+    }
+  ]
+}

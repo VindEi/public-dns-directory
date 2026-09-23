@@ -1,0 +1,23 @@
+{
+  "id": "applied-privacy",
+  "name": "Foundation for Applied Privacy",
+  "website": "https://applied-privacy.net",
+  "country": "AT",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Privacy Resolver",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "146.255.56.98",
+        "secondaryDns": null,
+        "ipv6Primary": "2a02:1680:1e:3052::98",
+        "ipv6Secondary": null,
+        "dohUrl": "https://doh.applied-privacy.net/query",
+        "dotHostname": "dot.applied-privacy.net"
+      },
+      "notes": "Austrian non-profit promoting digital privacy and uncensored encrypted DNS."
+    }
+  ]
+}

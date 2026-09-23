@@ -1,0 +1,23 @@
+{
+  "id": "hurricane-electric",
+  "name": "Hurricane Electric",
+  "website": "https://he.net",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Open Recursor",
+      "primaryCategory": "General",
+      "tags": ["ipv4", "ipv6"],
+      "endpoints": {
+        "primaryDns": "74.82.42.42",
+        "secondaryDns": null,
+        "ipv6Primary": "2001:470:20::2",
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Global Tier-1 IPv6 and IPv4 backbone recursor (ordns.he.net). Plain UDP/TCP port 53 only."
+    }
+  ]
+}

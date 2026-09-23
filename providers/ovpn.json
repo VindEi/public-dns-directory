@@ -1,0 +1,23 @@
+{
+  "id": "ovpn",
+  "name": "OVPN",
+  "website": "https://www.ovpn.com/en/blog/change-your-dns-servers-to-ovpns",
+  "country": "SE",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "RAM-Only Public Recursor",
+      "primaryCategory": "General",
+      "tags": ["ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "46.227.67.134",
+        "secondaryDns": "192.165.9.158",
+        "ipv6Primary": "2a07:a880:4601:10f0:cd45::1",
+        "ipv6Secondary": "2001:67c:750:1:cafe:cd45::1",
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Diskless, RAM-only DNS servers maintained by Swedish provider OVPN with zero query logging."
+    }
+  ]
+}

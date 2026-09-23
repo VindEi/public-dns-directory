@@ -1,0 +1,23 @@
+{
+  "id": "electro-dns",
+  "name": "Electro DNS",
+  "website": "https://elctrotm.org",
+  "country": "IR",
+  "profiles": [
+    {
+      "id": "gaming",
+      "name": "Gaming & Sanction Bypass",
+      "primaryCategory": "Gaming",
+      "tags": ["ipv4", "bypass"],
+      "endpoints": {
+        "primaryDns": "78.157.42.100",
+        "secondaryDns": "78.157.42.101",
+        "ipv6Primary": null,
+        "ipv6Secondary": null,
+        "dohUrl": null,
+        "dotHostname": null
+      },
+      "notes": "Gaming-optimized DNS routing to resolve connection limits, anti-cheat matchmaking errors, and download restrictions."
+    }
+  ]
+}

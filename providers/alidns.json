@@ -1,0 +1,23 @@
+{
+  "id": "alidns",
+  "name": "Alibaba Cloud DNS (AliDNS)",
+  "website": "https://www.alidns.com",
+  "country": "CN",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Anycast Resolver",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6"],
+      "endpoints": {
+        "primaryDns": "223.5.5.5",
+        "secondaryDns": "223.6.6.6",
+        "ipv6Primary": "2400:3200::1",
+        "ipv6Secondary": "2400:3200:baba::1",
+        "dohUrl": "https://dns.alidns.com/dns-query",
+        "dotHostname": "dns.alidns.com"
+      },
+      "notes": "Alibaba Cloud Anycast recursor. Provides low latency across Mainland China and APAC."
+    }
+  ]
+}

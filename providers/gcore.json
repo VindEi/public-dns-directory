@@ -1,0 +1,23 @@
+{
+  "id": "gcore",
+  "name": "Gcore Public DNS",
+  "website": "https://gcore.com/public-dns",
+  "country": "GLOBAL",
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Public Anycast Edge",
+      "primaryCategory": "General",
+      "tags": ["doh", "dot", "ipv4", "ipv6", "no-log"],
+      "endpoints": {
+        "primaryDns": "95.85.95.85",
+        "secondaryDns": "2.56.220.2",
+        "ipv6Primary": "2a03:90c0:999d::1",
+        "ipv6Secondary": "2a03:90c0:9992::1",
+        "dohUrl": "https://dns.gcore.com/dns-query",
+        "dotHostname": "dns.gcore.com"
+      },
+      "notes": "Global edge Anycast resolver by Gcore CDN. Non-filtering and privacy-respecting."
+    }
+  ]
+}
