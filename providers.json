@@ -1,0 +1,694 @@
+[
+  {
+    "id": "114dns",
+    "name": "114DNS",
+    "website": "https://www.114dns.com",
+    "country": "CN",
+    "profiles": [
+      "standard",
+      "safe",
+      "family"
+    ]
+  },
+  {
+    "id": "403-online",
+    "name": "403 Online",
+    "website": "https://403.online",
+    "country": "IR",
+    "profiles": [
+      "bypass"
+    ]
+  },
+  {
+    "id": "adguard",
+    "name": "AdGuard DNS",
+    "website": "https://adguard-dns.io",
+    "country": "GLOBAL",
+    "profiles": [
+      "default",
+      "family",
+      "unfiltered"
+    ]
+  },
+  {
+    "id": "airtel",
+    "name": "Bharti Airtel",
+    "website": "https://www.airtel.in",
+    "country": "IN",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "alidns",
+    "name": "Alibaba Cloud DNS (AliDNS)",
+    "website": "https://www.alidns.com",
+    "country": "CN",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "andrews-and-arnold",
+    "name": "Andrews & Arnold (A&A)",
+    "website": "https://www.aa.net.uk/dns/",
+    "country": "GB",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "applied-privacy",
+    "name": "Foundation for Applied Privacy",
+    "website": "https://applied-privacy.net",
+    "country": "AT",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "arvancloud",
+    "name": "ArvanCloud DNS",
+    "website": "https://www.arvancloud.ir",
+    "country": "IR",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "baidu",
+    "name": "Baidu Public DNS",
+    "website": "https://cloud.baidu.com",
+    "country": "CN",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "bebasdns",
+    "name": "BebasDNS (BebasID)",
+    "website": "https://bebasid.com",
+    "country": "ID",
+    "profiles": [
+      "default",
+      "security",
+      "unfiltered"
+    ]
+  },
+  {
+    "id": "begzar",
+    "name": "Begzar",
+    "website": "https://begzar.ir",
+    "country": "IR",
+    "profiles": [
+      "bypass"
+    ]
+  },
+  {
+    "id": "bt",
+    "name": "British Telecom (BT)",
+    "website": "https://www.bt.com",
+    "country": "GB",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "chunghwa-telecom",
+    "name": "Chunghwa Telecom (HiNet)",
+    "website": "https://www.cht.com.tw",
+    "country": "TW",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "cira",
+    "name": "CIRA Canadian Shield",
+    "website": "https://www.cira.ca/en/canadian-shield/",
+    "country": "CA",
+    "profiles": [
+      "private",
+      "protected",
+      "family"
+    ]
+  },
+  {
+    "id": "cleanbrowsing",
+    "name": "CleanBrowsing",
+    "website": "https://cleanbrowsing.org",
+    "country": "GLOBAL",
+    "profiles": [
+      "security",
+      "adult",
+      "family"
+    ]
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare DNS",
+    "website": "https://1.1.1.1",
+    "country": "GLOBAL",
+    "profiles": [
+      "standard",
+      "security",
+      "family"
+    ]
+  },
+  {
+    "id": "comodo",
+    "name": "Comodo / Xcitium Secure DNS",
+    "website": "https://www.comodo.com/secure-dns/",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "controld",
+    "name": "Control D",
+    "website": "https://controld.com",
+    "country": "GLOBAL",
+    "profiles": [
+      "unfiltered",
+      "malware",
+      "ads",
+      "family"
+    ]
+  },
+  {
+    "id": "cznic-odvr",
+    "name": "CZ.NIC ODVR",
+    "website": "https://www.nic.cz/odvr/",
+    "country": "CZ",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "decloudus",
+    "name": "DeCloudUs",
+    "website": "https://decloudus.com",
+    "country": "DE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "deutsche-telekom",
+    "name": "Deutsche Telekom",
+    "website": "https://www.telekom.de",
+    "country": "DE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "digitalcourage",
+    "name": "Digitalcourage",
+    "website": "https://digitalcourage.de/support/dns-server",
+    "country": "DE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "digitale-gesellschaft",
+    "name": "Digitale Gesellschaft",
+    "website": "https://www.digitale-gesellschaft.ch/dns/",
+    "country": "CH",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "dismail",
+    "name": "Dismail.de",
+    "website": "https://dismail.de",
+    "country": "DE",
+    "profiles": [
+      "fdns1",
+      "fdns2"
+    ]
+  },
+  {
+    "id": "dns-forge",
+    "name": "DNS Forge",
+    "website": "https://dnsforge.de",
+    "country": "DE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "dns-sb",
+    "name": "DNS.SB",
+    "website": "https://dns.sb",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "dns4eu",
+    "name": "DNS4EU",
+    "website": "https://joindns4.eu",
+    "country": "EU",
+    "profiles": [
+      "protective",
+      "child-protection",
+      "unfiltered"
+    ]
+  },
+  {
+    "id": "dnspod",
+    "name": "Tencent DNSPod Public DNS",
+    "website": "https://www.dnspod.cn/products/publicdns",
+    "country": "CN",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "electro-dns",
+    "name": "Electro DNS",
+    "website": "https://elctrotm.org",
+    "country": "IR",
+    "profiles": [
+      "gaming"
+    ]
+  },
+  {
+    "id": "fdn",
+    "name": "French Data Network (FDN)",
+    "website": "https://www.fdn.fr/actions/dns/",
+    "country": "FR",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "freifunk-muenchen",
+    "name": "Freifunk München",
+    "website": "https://ffmuc.net/wiki/doku.php?id=knb:doh-dot",
+    "country": "DE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "gcore",
+    "name": "Gcore Public DNS",
+    "website": "https://gcore.com/public-dns",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "google",
+    "name": "Google Public DNS",
+    "website": "https://developers.google.com/speed/public-dns",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "hurricane-electric",
+    "name": "Hurricane Electric",
+    "website": "https://he.net",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "iij",
+    "name": "Internet Initiative Japan (IIJ)",
+    "website": "https://www.iij.ad.jp",
+    "country": "JP",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "kpn",
+    "name": "KPN",
+    "website": "https://www.kpn.com",
+    "country": "NL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "kt",
+    "name": "KT Corporation (Korea Telecom)",
+    "website": "https://www.kt.com",
+    "country": "KR",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "lg-uplus",
+    "name": "LG Uplus",
+    "website": "https://www.lguplus.com",
+    "country": "KR",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "libredns",
+    "name": "LibreDNS",
+    "website": "https://libredns.gr",
+    "country": "GR",
+    "profiles": [
+      "standard",
+      "noads"
+    ]
+  },
+  {
+    "id": "lightning-wire-labs",
+    "name": "Lightning Wire Labs (IPFire)",
+    "website": "https://www.lightningwirelabs.com",
+    "country": "DE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "lumen-level3",
+    "name": "Level 3 / Lumen",
+    "website": "https://www.lumen.com",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "mullvad",
+    "name": "Mullvad Public DNS",
+    "website": "https://mullvad.net/help/dns-over-https-and-dns-over-tls",
+    "country": "SE",
+    "profiles": [
+      "unfiltered",
+      "adblock",
+      "base",
+      "extended",
+      "family",
+      "all"
+    ]
+  },
+  {
+    "id": "nextdns",
+    "name": "NextDNS",
+    "website": "https://nextdns.io",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "ntt-america",
+    "name": "NTT America (Global IP Network)",
+    "website": "https://gin.ntt.net",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "nwps-fi",
+    "name": "NWPS.fi",
+    "website": "https://nwps.fi",
+    "country": "FI",
+    "profiles": [
+      "public",
+      "kids",
+      "protective",
+      "unfiltered"
+    ]
+  },
+  {
+    "id": "openbld",
+    "name": "OpenBLD.net",
+    "website": "https://openbld.net",
+    "country": "GLOBAL",
+    "profiles": [
+      "ada",
+      "ric"
+    ]
+  },
+  {
+    "id": "opendns",
+    "name": "Cisco Umbrella (OpenDNS)",
+    "website": "https://www.opendns.com",
+    "country": "GLOBAL",
+    "profiles": [
+      "standard",
+      "familyshield"
+    ]
+  },
+  {
+    "id": "opennic",
+    "name": "OpenNIC Project",
+    "website": "https://www.opennic.org",
+    "country": "GLOBAL",
+    "profiles": [
+      "anycast"
+    ]
+  },
+  {
+    "id": "optus",
+    "name": "Optus",
+    "website": "https://www.optus.com.au",
+    "country": "AU",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "orange-france",
+    "name": "Orange France",
+    "website": "https://www.orange.fr",
+    "country": "FR",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "ovpn",
+    "name": "OVPN",
+    "website": "https://www.ovpn.com/en/blog/change-your-dns-servers-to-ovpns",
+    "country": "SE",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "puntcat",
+    "name": "Fundació puntCAT (dns.cat)",
+    "website": "https://fundacio.cat",
+    "country": "ES",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "quad9",
+    "name": "Quad9",
+    "website": "https://quad9.net",
+    "country": "GLOBAL",
+    "profiles": [
+      "secured",
+      "unsecured",
+      "secured-ecs"
+    ]
+  },
+  {
+    "id": "radar-game",
+    "name": "Radar Game",
+    "website": "https://radar.game",
+    "country": "IR",
+    "profiles": [
+      "gaming"
+    ]
+  },
+  {
+    "id": "restena",
+    "name": "Restena Foundation",
+    "website": "https://www.restena.lu",
+    "country": "LU",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "rethinkdns",
+    "name": "RethinkDNS",
+    "website": "https://rethinkdns.com",
+    "country": "GLOBAL",
+    "profiles": [
+      "max",
+      "basic"
+    ]
+  },
+  {
+    "id": "safedns",
+    "name": "SafeDNS",
+    "website": "https://www.safedns.com",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "shecan",
+    "name": "Shecan",
+    "website": "https://shecan.ir",
+    "country": "IR",
+    "profiles": [
+      "bypass"
+    ]
+  },
+  {
+    "id": "shelter-dns",
+    "name": "Shelter DNS",
+    "website": "https://shelter.ir",
+    "country": "IR",
+    "profiles": [
+      "gaming"
+    ]
+  },
+  {
+    "id": "singtel",
+    "name": "Singtel",
+    "website": "https://www.singtel.com",
+    "country": "SG",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "sk-broadband",
+    "name": "SK Broadband",
+    "website": "https://www.skbroadband.com",
+    "country": "KR",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "skydns",
+    "name": "SkyDNS",
+    "website": "https://www.skydns.ru",
+    "country": "RU",
+    "profiles": [
+      "public-filter"
+    ]
+  },
+  {
+    "id": "starhub",
+    "name": "StarHub",
+    "website": "https://www.starhub.com",
+    "country": "SG",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "swisscom",
+    "name": "Swisscom",
+    "website": "https://www.swisscom.ch",
+    "country": "CH",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "switch",
+    "name": "SWITCH DNS",
+    "website": "https://portal.switch.ch/pub/public-dns/",
+    "country": "CH",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "telefonica",
+    "name": "Telefónica / Movistar",
+    "website": "https://www.telefonica.com",
+    "country": "ES",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "telstra",
+    "name": "Telstra",
+    "website": "https://www.telstra.com.au",
+    "country": "AU",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "twnic-quad101",
+    "name": "TWNIC Quad101",
+    "website": "https://twnic.tw",
+    "country": "TW",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "uncensoreddns",
+    "name": "UncensoredDNS",
+    "website": "https://blog.uncensoreddns.org",
+    "country": "DK",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "vercara-ultradns",
+    "name": "Vercara UltraDNS Public",
+    "website": "https://vercara.com",
+    "country": "GLOBAL",
+    "profiles": [
+      "threat-protection",
+      "reliability"
+    ]
+  },
+  {
+    "id": "virgin-media",
+    "name": "Virgin Media",
+    "website": "https://www.virginmedia.com",
+    "country": "GB",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "wikimedia",
+    "name": "Wikimedia Foundation DNS",
+    "website": "https://meta.wikimedia.org/wiki/Wikimedia_DNS",
+    "country": "GLOBAL",
+    "profiles": [
+      "default"
+    ]
+  },
+  {
+    "id": "yandex",
+    "name": "Yandex DNS",
+    "website": "https://dns.yandex.com",
+    "country": "RU",
+    "profiles": [
+      "basic",
+      "safe",
+      "family"
+    ]
+  }
+]
