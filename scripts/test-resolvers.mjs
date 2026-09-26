@@ -7,6 +7,8 @@ import { Resolver } from "node:dns/promises";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
+const CONCURRENCY_LIMIT = 10;
+
 const ajv = new Ajv({ allErrors: true, validateSchema: false });
 addFormats(ajv);
 
@@ -66,13 +68,12 @@ function isPrivateIp(ip) {
 }
 
 async function testUdpDns(ip) {
-  const resolver = new Resolver({ timeout: 4000, tries: 2 });
+  const resolver = new Resolver({ timeout: 3500, tries: 2 });
   resolver.setServers([ip]);
   try {
     await resolver.resolve4("example.com");
   } catch (err) {
-    // Retry once on rate-limited or dropped UDP packets
-    await new Promise((r) => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 500));
     await resolver.resolve4("example.com");
   }
 }
@@ -84,7 +85,7 @@ async function testDot(dotHostname) {
         host: dotHostname,
         port: 853,
         servername: dotHostname,
-        timeout: 5000,
+        timeout: 4500,
         rejectUnauthorized: true,
       },
       () => {
@@ -107,7 +108,7 @@ function testDohInternal(urlStr) {
     const url = new URL(urlStr);
 
     const client = http2.connect(url.origin, {
-      timeout: 6000,
+      timeout: 5000,
       servername: url.hostname,
       rejectUnauthorized: false,
     });
@@ -137,7 +138,7 @@ function testDohInternal(urlStr) {
       "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
     });
 
-    req.setTimeout(6000, () => {
+    req.setTimeout(5000, () => {
       if (!resolved) {
         resolved = true;
         req.destroy();
@@ -187,7 +188,7 @@ function testDohHttp1(urlStr) {
           "user-agent": "Mozilla/5.0 (compatible; PublicDNSDirectoryCheck/1.0)",
         },
         rejectUnauthorized: false,
-        timeout: 6000,
+        timeout: 5000,
       },
       (res) => {
         if (res.statusCode >= 200 && res.statusCode < 400) {
@@ -212,8 +213,7 @@ async function testDoh(urlStr) {
   try {
     await testDohInternal(urlStr);
   } catch (err) {
-    // Retry once after 800ms cooldown for rate-limited sockets
-    await new Promise((r) => setTimeout(r, 800));
+    await new Promise((r) => setTimeout(r, 600));
     await testDohInternal(urlStr);
   }
 }
@@ -222,10 +222,9 @@ const failures = [];
 const warnings = [];
 let totalProbes = 0;
 let passedProbes = 0;
+let completedFiles = 0;
 
-console.log(`\nTesting ${files.length} DNS providers...\n`);
-
-for (const file of files) {
+async function testProviderFile(file) {
   const filePath = path.join(providersDir, file);
   let data;
 
@@ -239,8 +238,11 @@ for (const file of files) {
       target: file,
       error: err.message,
     });
-    console.log(`[PARSE ERROR] ${file}`);
-    continue;
+    completedFiles++;
+    console.log(
+      `[${String(completedFiles).padStart(2, " ")}/${files.length}] [PARSE ERROR] ${file}`,
+    );
+    return;
   }
 
   if (file !== `${data.id}.json`) {
@@ -261,8 +263,11 @@ for (const file of files) {
       target: "schema",
       error: JSON.stringify(validate.errors[0]?.message),
     });
-    console.log(`[SCHEMA FAIL] ${file}`);
-    continue;
+    completedFiles++;
+    console.log(
+      `[${String(completedFiles).padStart(2, " ")}/${files.length}] [SCHEMA FAIL] ${file}`,
+    );
+    return;
   }
 
   let fileHasError = false;
@@ -359,16 +364,46 @@ for (const file of files) {
     }
   }
 
+  completedFiles++;
+  const progress = `${completedFiles}/${files.length}`.padEnd(7, " ");
+  const targetId = data.id.padEnd(25, " ");
   if (fileHasError) {
-    console.log(`[FAIL] ${data.id}`);
+    console.log(`${progress} ${targetId} [FAIL]`);
   } else {
-    console.log(`[PASS] ${data.id}`);
+    console.log(`${progress} ${targetId} [PASS]`);
   }
 }
 
+async function runPool(items, limit, workerFn) {
+  const pool = new Set();
+  for (const item of items) {
+    const promise = Promise.resolve().then(() => workerFn(item));
+    pool.add(promise);
+    const clean = () => pool.delete(promise);
+    promise.then(clean, clean);
+    if (pool.size >= limit) {
+      await Promise.race(pool);
+    }
+  }
+  return Promise.all(pool);
+}
+
+// Main Execution
+console.log(
+  `\nTesting ${files.length} DNS providers (${CONCURRENCY_LIMIT} concurrent workers)...\n`,
+);
+const startTime = Date.now();
+
+await runPool(files, CONCURRENCY_LIMIT, testProviderFile);
+
+const duration = ((Date.now() - startTime) / 1000).toFixed(1);
+
+failures.sort((a, b) => a.file.localeCompare(b.file));
+warnings.sort((a, b) => a.file.localeCompare(b.file));
+
 console.log("\n" + "=".repeat(105));
 console.log(
-  `PROBES COMPLETE: ${passedProbes}/${totalProbes} passed (${failures.length} hard failures, ${warnings.length} warnings)`,
+  `PROBES COMPLETE: ${passedProbes}/${totalProbes} passed in ${duration}s (${failures.length} hard failures, ${warnings.length} warnings)`,
 );
 console.log("=".repeat(105) + "\n");
 

@@ -1,4 +1,4 @@
-name: Test and Build Directory
+name: Public DNS Pipeline
 
 on:
   push:
@@ -9,39 +9,79 @@ on:
     - cron: "0 4 * * 0" # Once weekly on Sunday at 04:00 UTC
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 concurrency:
-  group: "build-and-deploy"
+  group: "pipeline-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
-  validate-and-publish:
-    runs-on: ubuntu-latest
+  verify-resolvers:
+    name: "1. Verify Resolvers"
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run Schema and Resolver Tests
+      - name: Run Schema and Resolver Probes
         run: npm test
 
-      - name: Build index.json
+  build-directory:
+    name: "2. Build Artifacts"
+    needs: verify-resolvers
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Compile Distribution Bundles
         run: npm run build
 
-      - name: Push index.json to data branch
-        if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v6
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: data
-          publish_dir: ./dist
-          keep_files: false
+          name: directory-dist
+          path: ./dist
+          retention-days: 1
+
+  publish-data:
+    name: "3. Publish to Branch"
+    needs: build-directory
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v6
+        with:
+          name: directory-dist
+          path: ${{ runner.temp }}/dist
+
+      - name: Push artifacts to data branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B data
+          git rm -rf . > /dev/null 2>&1 || true
+          git clean -fxd
+          cp -r ${{ runner.temp }}/dist/* .
+          git add -A
+          git commit -m "chore(data): automated directory update [skip ci]" || exit 0
+          git push -f origin data
